@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useSearchProvider } from './context/SearchContext'
-import Images from './pages/Images';
 import Navbar from './pages/Navbar';
+import Videos from './pages/Videos';
+import Images from './pages/Images';
 import Search from './pages/Search';
 import SearchHomepage from './pages/SearchHomepage';
-
 
 
 
@@ -30,12 +30,9 @@ function App() {
 
 
             <Route path='search' element={<Search />} />
-
             
-           
+            <Route path='video' element={<Videos />} />
             <Route path='image' element={<Images />} />
-
-            
 
           </Route>
 
