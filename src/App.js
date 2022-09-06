@@ -4,6 +4,7 @@ import { useSearchProvider } from './context/SearchContext'
 import Navbar from './pages/Navbar';
 import Videos from './pages/Videos';
 import Images from './pages/Images';
+import News from './pages/News';
 import Search from './pages/Search';
 import SearchHomepage from './pages/SearchHomepage';
 
@@ -23,16 +24,12 @@ function App() {
 
         <Routes>
 
-
-
           <Route path='/' element={searchTerm ? <Navbar darkTheme={darkTheme} setDarkTheme={setDarkTheme} /> : <SearchHomepage />}>
 
-
-
             <Route path='search' element={<Search />} />
-            
             <Route path='video' element={<Videos />} />
             <Route path='image' element={<Images />} />
+            <Route path='news' element={<News />} />
 
           </Route>
 
