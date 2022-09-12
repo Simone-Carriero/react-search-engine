@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSearchProvider } from '../context/SearchContext'
+import { useSearchProvider } from '../contexts/SearchContext'
 import lupita from '../assets/Lupita.png'
 
 const SearchHomepage = () => {
