@@ -1,29 +1,31 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSearchProvider } from '../context/SearchContext'
-import { fetchData } from '../utils/fetchData'
+import Spinner from '../components/Spinner'
+import { useSearchProvider } from '../contexts/SearchContext'
+import useFetchData from '../hooks/useFetchData'
 
 
 const News = () => {
   const { searchTerm } = useSearchProvider()
-  const [news, setNews] = useState([])
   const location = useLocation()
 
-  useEffect(() => {
-    fetchData(`${location.pathname}/q=${searchTerm}&num=40`)
-      .then(res => setNews(res.entries))
-  }, [searchTerm])
+  const { result, isLoading, isError
+  } = useFetchData(`${location.pathname}/q=${searchTerm}`)
 
   
 
 
   return (
     <div className="sm:px-56 p-10 flex flex-col gap-16">
+      
+      {isLoading && <Spinner />}
+
+
+      {isError && <div>Error...</div>}
 
 
       {
-        news?.map((item, i) => (
+        result?.entries?.map((item, i) => (
 
           <div key={i}>
             <a href={item?.source?.href}>{item?.source?.title}</a>

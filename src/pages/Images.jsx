@@ -1,24 +1,28 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSearchProvider } from '../context/SearchContext'
-import { fetchData } from '../utils/fetchData'
+import Spinner from '../components/Spinner'
+import { useSearchProvider } from '../contexts/SearchContext'
+import useFetchData from '../hooks/useFetchData'
 
 const Images = () => {
   const { searchTerm } = useSearchProvider()
-  const [images, setImages] = useState([])
 
   const location = useLocation()
 
-  useEffect(() => {
-    fetchData(`${location.pathname}/q=${searchTerm}&num=40`)
-      .then(res => setImages(res.image_results))
-  }, [searchTerm])
+  const { result, isLoading, isError
+  } = useFetchData(`${location.pathname}/q=${searchTerm}`)
 
   
   return (
     <div className='flex flex-wrap justify-center items-center gap-5 py-6 xl:p-6'>
+      
+      {isLoading && <Spinner />}
+
+
+      {isError && <div>Error...</div>}
+
       {
-        images?.map(({ image, link }, i) => (
+        result?.image_results?.map(({ image, link }, i) => (
           <div key={i} className='flex-grow'>
             <a className='hover:underline' href={link?.href}>
               <img className='my-0 mx-auto' src={image?.src} alt={image?.alt} loading='lazy' />

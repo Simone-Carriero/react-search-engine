@@ -1,8 +1,13 @@
 import React from 'react'
+import Answers from './Answers'
 
-const SearchResults = ({results}) => {
+const SearchResults = ({results, answers}) => {
   return (
     <div className='space-y-8'>
+      {
+        answers && <Answers answers={answers} />
+      }
+
       {
         results?.map(({ link, title, description }, index) => (
           <div key={index} className="w-full text-lg lg:w-2/3">
