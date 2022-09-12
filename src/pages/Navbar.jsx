@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import lupita from '../assets/Lupita.png'
-import { useSearchProvider } from '../context/SearchContext'
+import Links from '../components/Links'
+import { useSearchProvider } from '../contexts/SearchContext'
+
 
 const Navbar = ({ darkTheme, setDarkTheme}) => {
 
@@ -9,7 +11,8 @@ const Navbar = ({ darkTheme, setDarkTheme}) => {
 
   const [search, setSearch] = useState(searchTerm)
 
-  const navigate= useNavigate()
+  const navigate = useNavigate()
+  
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
@@ -18,7 +21,7 @@ const Navbar = ({ darkTheme, setDarkTheme}) => {
   }
 
   const returnToHomepage = () => {
-    localStorage.removeItem('searchTerm')
+    sessionStorage.removeItem('searchTerm')
     navigate('/')
     window.location.reload();
   }
@@ -27,7 +30,7 @@ const Navbar = ({ darkTheme, setDarkTheme}) => {
   return (
     <>
   
-      <header className='flex flex-col items-center py-3 gap-4'>
+      <header className='flex flex-col items-center py-3 gap-4 min-w-full'>
         <div className='flex flex-col gap-2 w-full items-center md:flex-row md:justify-between'>
 
         
@@ -54,12 +57,8 @@ const Navbar = ({ darkTheme, setDarkTheme}) => {
           </button>
         </div>
 
-        <nav className='flex gap-4'>
-          <NavLink to='/search'>All</NavLink>
-          <NavLink to='/videos'>Videos</NavLink>
-          <NavLink to='/image'>Images</NavLink>
-          <NavLink to='/news'>News</NavLink>
-        </nav>
+        <Links />
+        
       </header>
       <Outlet />
     </>
