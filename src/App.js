@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useSearchProvider } from './context/SearchContext'
+import { useSearchProvider } from './contexts/SearchContext'
 import Navbar from './pages/Navbar';
 import Videos from './pages/Videos';
 import Images from './pages/Images';
